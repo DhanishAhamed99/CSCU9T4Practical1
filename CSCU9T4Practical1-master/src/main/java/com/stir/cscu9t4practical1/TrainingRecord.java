@@ -17,7 +17,6 @@ public class TrainingRecord {
     // add a record to the list
    public String addEntry(Entry e){
        ListIterator<Entry> iter = tr.listIterator();
-       String result = "Record added \n";
        while (iter.hasNext()) {
           Entry current = iter.next();
           if (e.getName().equalsIgnoreCase(current.getName()) && e.getMonth()== current.getMonth()&& e.getDay()== current.getDay() && e.getYear()== current.getYear()){
@@ -25,6 +24,7 @@ public class TrainingRecord {
             }     
        }
        tr.add(e);
+       String result = "Record added\n" + getNumberOfEntries();
        return result;
    } // addClass
    
@@ -40,9 +40,9 @@ public class TrainingRecord {
        return result;
    } // lookupEntry
    
-      public String lookupAllEntry (int d, int m, int y) {
+      public String lookupEntries (int d, int m, int y) {
        ListIterator<Entry> iter = tr.listIterator();
-       String result = "No entries found";
+       String result = "Sorry couldn't find anything for this date";
        String currResult;
        String finalResult = "";
        while (iter.hasNext()) {
@@ -51,8 +51,8 @@ public class TrainingRecord {
              currResult = current.getEntry();
              finalResult = finalResult.concat(currResult);
              result = finalResult;
-          }
-            }
+             }
+        }
        return result;
        
    } // lookupAllEntry
