@@ -43,6 +43,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JButton addS = new JButton("Add Swim");
     private JButton lookUpByDate = new JButton("Look Up");
     private JButton findAllByDate = new JButton("Find All By Date");
+    private JButton remove = new JButton("Remove");
 
     private TrainingRecord myAthletes = new TrainingRecord();
 
@@ -108,6 +109,8 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         lookUpByDate.addActionListener(this);
         add(findAllByDate);
         findAllByDate.addActionListener(this);
+        add(remove);
+        remove.addActionListener(this);
         add(outputArea);
         outputArea.setEditable(false);
         setSize(1000, 200);
@@ -136,6 +139,9 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         }
         if (event.getSource() == findAllByDate) {
             message = findAllEntry();
+        }
+        if (event.getSource() == remove) {
+            message = removeEntry();
         }
         outputArea.setText(message);
         blankDisplay();
@@ -205,6 +211,21 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
            return("Invalid data type entered for Date. Please use numbers only");
         }  
         
+    }
+    
+    public String removeEntry(){
+        try{
+        String n = name.getText();
+        int m = Integer.parseInt(month.getText());
+        int d = Integer.parseInt(day.getText());
+        int y = Integer.parseInt(year.getText());
+        outputArea.setText("removing record ...");
+        String message = myAthletes.removeEntry(n, d, m, y);
+        return message;
+        }
+        catch(NumberFormatException e){
+           return("Invalid data type entered for Date. Please use numbers only");
+        }  
     }
 
     public void blankDisplay() {

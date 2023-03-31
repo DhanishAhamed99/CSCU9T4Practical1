@@ -24,7 +24,7 @@ public class TrainingRecord {
             }     
        }
        tr.add(e);
-       String result = "Record added\n" + getNumberOfEntries();
+       String result = "Record added\n";
        return result;
    } // addClass
    
@@ -40,7 +40,7 @@ public class TrainingRecord {
        return result;
    } // lookupEntry
    
-      public String lookupEntries (int d, int m, int y) {
+    public String lookupEntries (int d, int m, int y) {
        ListIterator<Entry> iter = tr.listIterator();
        String result = "Sorry couldn't find anything for this date";
        String currResult;
@@ -55,7 +55,20 @@ public class TrainingRecord {
         }
        return result;
        
-   } // lookupAllEntry
+     } // lookupAllEntry
+    
+    public String removeEntry(String n, int d, int m, int y){
+       ListIterator<Entry> iter = tr.listIterator();
+       String result = "No such entry found";
+       while (iter.hasNext()) {
+          Entry current = iter.next();
+          if (current.getName().equals(n) && current.getDay()==d && current.getMonth()==m && current.getYear()==y){
+             result = "the following entry has been deleted : " + current.getEntry();
+             iter.remove();
+          }
+       }
+       return result;
+    }
    
    // Count the number of entries
    public int getNumberOfEntries(){
